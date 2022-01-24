@@ -1,0 +1,5 @@
+rsconnect/
+.RData
+.Renviron
+.Rhistory
+.Rprofile
