@@ -19,10 +19,10 @@ You will need a U.S. Census Bureau API key to run this app locally. [Request a f
 Next, clone this repo or save all files needed to run the app (`global.R`, `server.R`, `ui.R`) locally in a directory called enrollment-calculator. Once you have your API key, create a file called `.Rprofile` in the enrollment-calculator directory containing the following:
 
 ``` r
-CENSUS_KEY = "your key goes here"
+CENSUS_KEY = "your-key-goes-here"
 ```
 
-It's easy to run Shiny apps locally using RStudio. Once the Shiny package is installed and attached, RStudio will automatically recognize the global.R, server.R, and ui.R files as part of a Shiny app and will give you the option to "Run App" instead of the usual "Run" button. 
+It's easy to run Shiny apps locally using RStudio. Once the Shiny package is installed and attached, RStudio will automatically recognize the `global.R`, `server.R`, and `ui.R` files as part of a Shiny app and will give you the option to "Run App" instead of the usual "Run" button. 
 
 Alternatively, you can run the app from the console:
 
