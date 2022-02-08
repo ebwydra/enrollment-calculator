@@ -60,5 +60,13 @@ fluidPage(
                   tabPanel("Population Characteristics", tableOutput("pop") %>% withSpinner(color="#00356b", size=2))
       )
     )
-  )
+  ),
+  hr(),
+  tags$footer("Made by Emma Brennan-Wydra.", a(href="https://github.com/ebwydra/enrollment-calculator", "Source code available on Github."), align = "center", 
+              style = "
+              bottom:0;
+              width:100%;
+              height:50px;
+              padding: 10px;
+              z-index: 1000;")
 )
