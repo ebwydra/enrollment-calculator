@@ -129,18 +129,24 @@ calculate_adjusted_proportions <- function(sums_df) {
   nhl_df <- sums_df %>% slice(2:9) # Not Hispanic or Latino
   hl_df <- sums_df %>% slice(10:17) # Hispanic or Latino
   
-  # Subtract out "Some other race alone" [row 7] from total population [row 1]
-  nhl_df[9,2] = nhl_df[1,2] - nhl_df[7,2]
-  hl_df[9,2] = hl_df[1,2] - hl_df[7,2]
+  # Add "Some other race alone" [row 7] to "Two or more races" [row 8]
+  nhl_df[9,2] = nhl_df[7,2] + nhl_df[8,2]
+  hl_df[9,2] = hl_df[7,2] + hl_df[8,2]
+  
+  # Add labels
+  nhl_df[9,1] = "Not Hispanic or Latino : Two or more races + Some other race alone"
+  hl_df[9,1] = "Hispanic or Latino : Two or more races + Some other race alone"
+  
+  # Remove original columns
+  nhl_df <- nhl_df %>% slice(-7, -8)
+  hl_df <- hl_df %>% slice(-7, -8)
   
   # Calculate (adjusted) population proportions
-  adj_nhl_n <- nhl_df[9,2]
-  adj_hl_n <- hl_df[9,2]
-  nhl_prop_df <- nhl_df %>% mutate(adj_prop = n/adj_nhl_n*nhl_prop) %>% slice(-1,-7)
-  hl_prop_df <- hl_df %>% mutate(adj_prop = n/adj_hl_n*hl_prop) %>% slice(-1, -7)
+  nhl_prop_df <- nhl_df %>% mutate(adj_prop = n/nhl_n*nhl_prop) %>% slice(-1)
+  hl_prop_df <- hl_df %>% mutate(adj_prop = n/hl_n*hl_prop) %>% slice(-1)
   
   # Bind dfs
-  prop_df <- bind_rows(nhl_prop_df, hl_prop_df) %>% slice(-7,-14)
+  prop_df <- bind_rows(nhl_prop_df, hl_prop_df)
   
   # Return result
   return(prop_df)
